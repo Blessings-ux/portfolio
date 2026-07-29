@@ -195,6 +195,7 @@
     border:1px solid var(--line); border-radius:16px; overflow:hidden;
     background:var(--surface);
   }
+  .project-card + .project-card{margin-top:28px;}
   .project-visual{
     background:
       radial-gradient(circle at 30% 20%, rgba(94,234,212,0.18), transparent 55%),
@@ -267,7 +268,7 @@
     <div class="brand"><span class="dot"></span> Fridah Njoka</div>
     <div class="navlinks">
       <a href="#about">About</a>
-      <a href="#project">Project</a>
+      <a href="#project">Projects</a>
       <a href="#experience">Experience</a>
       <a href="#contact">Contact</a>
     </div>
@@ -360,8 +361,8 @@
     <div class="node" style="top:0"></div>
     <div class="wrap">
       <div class="sec-head">
-        <div class="eyebrow">Featured project</div>
-        <h2>SheMove — a women‑only ride‑hailing platform.</h2>
+        <div class="eyebrow">Projects</div>
+        <h2>What I've built.</h2>
       </div>
       <div class="project-card reveal">
         <div class="project-visual">
@@ -381,6 +382,26 @@
           </ul>
           <a class="btn ghost" href="https://shemove.netlify.app/" target="_blank" rel="noopener" style="font-size:13px; padding:10px 16px;">View project link →</a>
           <p style="color:var(--muted); font-size:13px; margin-top:14px;">💡 Try it out: sign up with any email to explore the app live.</p>
+        </div>
+      </div>
+
+      <div class="project-card reveal">
+        <div class="project-visual">
+          <div class="stack-line"><span class="sw" style="background:var(--teal)"></span> HTML front end</div>
+          <div class="stack-line"><span class="sw" style="background:var(--amber)"></span> Client-side file merging</div>
+          <div class="stack-line"><span class="sw"></span> Deployed on Netlify</div>
+        </div>
+        <div class="project-body">
+          <h3>Paper Duet</h3>
+          <p class="project-tagline">Personal project · Solo build</p>
+          <p>Paper Duet is a document utility site that merges multiple file types — images, Word documents, and more — into a single combined PDF, built to simplify a task people otherwise juggle across several tools.</p>
+          <ul>
+            <li>Built the full interface and merge logic in HTML</li>
+            <li>Supports mixed input types (images, Word docs, and other formats) in one merge flow</li>
+            <li>Outputs a single, clean PDF ready to download</li>
+            <li>Deployed and hosted on Netlify</li>
+          </ul>
+          <a class="btn ghost" href="https://paper-duet-app.netlify.app/" target="_blank" rel="noopener" style="font-size:13px; padding:10px 16px;">View project link →</a>
         </div>
       </div>
     </div>
