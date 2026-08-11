@@ -9,13 +9,13 @@
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Newsreader:ital,wght@0,400;0,500;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root{
-    --bg:#0B1220;
-    --surface:#111A2E;
-    --surface-2:#161F36;
-    --line:#26314C;
-    --text:#F2F0EA;
-    --muted:#93A0BD;
-    --amber:#FFB454;
+    --bg:#080B12;
+    --surface:#10151F;
+    --surface-2:#151B27;
+    --line:#212938;
+    --text:#EDEFF3;
+    --muted:#8791A6;
+    --amber:#E8935A;
     --teal:#5EEAD4;
     --max:1080px;
   }
@@ -34,7 +34,7 @@
  
   a{color:inherit;}
  
-  ::selection{ background:var(--amber); color:#0B1220; }
+  ::selection{ background:var(--teal); color:#080B12; }
  
   /* ---------- Layout shells ---------- */
   .wrap{max-width:var(--max); margin:0 auto; padding:0 28px;}
@@ -58,8 +58,8 @@
   }
   .brand .dot{
     width:9px; height:9px; border-radius:50%;
-    background:var(--amber);
-    box-shadow:0 0 0 4px rgba(255,180,84,0.15);
+    background:var(--teal);
+    box-shadow:0 0 0 4px rgba(94,234,212,0.15);
   }
   .navlinks{display:flex; gap:28px; font-size:14px; color:var(--muted);}
   .navlinks a{text-decoration:none; transition:color .2s ease;}
@@ -125,7 +125,7 @@
   }
   .eyebrow{
     display:inline-flex; align-items:center; gap:8px;
-    font-size:13px; letter-spacing:0.08em; text-transform:uppercase;
+    font-size:12px; font-weight:500; letter-spacing:0.12em; text-transform:uppercase;
     color:var(--teal); margin-bottom:22px;
   }
   .eyebrow::before{
@@ -133,16 +133,18 @@
   }
   h1.title{
     font-family:'Space Grotesk', sans-serif;
-    font-weight:700;
-    font-size:clamp(38px, 6vw, 68px);
-    line-height:1.05;
-    letter-spacing:-0.01em;
-    margin:0 0 22px 0;
-    max-width:820px;
+    font-weight:600;
+    font-size:clamp(40px, 6vw, 66px);
+    line-height:1.08;
+    letter-spacing:-0.02em;
+    margin:0 0 24px 0;
+    max-width:780px;
   }
-  h1.title .accent{color:var(--amber);}
+  h1.title .accent{color:var(--amber); font-weight:700;}
   .lede{
-    font-size:19px; color:var(--muted); max-width:600px; margin:0 0 36px 0;
+    font-family:'Space Grotesk', sans-serif;
+    font-size:17px; font-weight:400; color:var(--muted); max-width:560px; margin:0 0 36px 0;
+    line-height:1.65;
   }
   .cta-row{display:flex; gap:14px; flex-wrap:wrap;}
   .btn{
@@ -161,15 +163,17 @@
     overflow:hidden; margin-top:64px;
   }
   .qf{background:var(--surface); padding:22px 20px;}
-  .qf .num{font-family:'Space Grotesk',sans-serif; font-size:26px; font-weight:700; color:var(--amber);}
+  .qf .num{font-family:'Space Grotesk',sans-serif; font-size:27px; font-weight:700; color:var(--teal); letter-spacing:-0.01em;}
   .qf .label{font-size:13px; color:var(--muted); margin-top:4px;}
+  .quickfacts-4{grid-template-columns:repeat(4,1fr);}
+  @media (max-width: 640px){.quickfacts-4{grid-template-columns:repeat(2,1fr);}}
  
   /* ---------- Section heading ---------- */
   .sec-head{max-width:640px; margin:0 auto 56px auto; text-align:center;}
   .sec-head .eyebrow{justify-content:center;}
   .sec-head .eyebrow::before{display:none;}
   .sec-head h2{
-    font-size:clamp(26px,3.4vw,36px); margin:6px 0 0 0; font-weight:600;
+    font-size:clamp(24px,3.2vw,34px); margin:6px 0 0 0; font-weight:600; letter-spacing:-0.01em;
   }
  
   /* ---------- About / skills ---------- */
@@ -185,8 +189,8 @@
   .chip-row{display:flex; flex-wrap:wrap; gap:8px;}
   .chip{
     font-family:'JetBrains Mono',monospace; font-size:12.5px;
-    padding:6px 11px; border:1px solid var(--line); border-radius:6px;
-    color:var(--text); background:var(--surface);
+    padding:6px 11px; border:1px solid transparent; border-radius:6px;
+    color:var(--muted); background:var(--surface-2);
   }
  
   /* ---------- Featured project ---------- */
@@ -209,10 +213,11 @@
   .stack-line .sw{width:8px; height:8px; border-radius:2px; background:var(--teal); flex:none;}
   .project-body{padding:40px;}
   .project-body h3{font-size:24px; margin:0 0 6px 0;}
-  .project-tagline{color:var(--amber); font-size:14px; margin:0 0 18px 0; font-family:'Space Grotesk',sans-serif;}
+  .project-tagline{color:var(--teal); font-size:13px; font-weight:500; letter-spacing:0.03em; margin:0 0 18px 0; font-family:'Space Grotesk',sans-serif;}
   .project-body p{color:var(--muted); font-size:15.5px; margin:0 0 14px 0;}
   .project-body ul{margin:0 0 22px 0; padding-left:18px; color:var(--muted); font-size:15px;}
   .project-body li{margin-bottom:8px;}
+  .project-links{display:flex; gap:12px; flex-wrap:wrap;}
  
   /* ---------- Experience ---------- */
   .timeline{display:flex; flex-direction:column; gap:0;}
@@ -228,6 +233,19 @@
   .tl-item ul{margin:0; padding-left:18px;}
   .tl-item li{margin-bottom:6px;}
  
+  /* ---------- Education meta ---------- */
+  .edu-meta{
+    display:grid; grid-template-columns:1fr 1fr; gap:20px;
+    margin-top:36px; padding-top:32px; border-top:1px solid var(--line);
+    font-size:14.5px; color:var(--muted);
+  }
+  .edu-meta .k{
+    font-family:'Space Grotesk',sans-serif; font-size:12px; font-weight:500;
+    letter-spacing:0.1em; text-transform:uppercase; color:var(--teal);
+    display:block; margin-bottom:6px;
+  }
+  @media (max-width: 640px){.edu-meta{grid-template-columns:1fr;}}
+
   /* ---------- Contact ---------- */
   .contact-box{
     display:flex; flex-direction:column; align-items:center; text-align:center;
@@ -269,6 +287,7 @@
       <a href="#about">About</a>
       <a href="#project">Projects</a>
       <a href="#experience">Experience</a>
+      <a href="#education">Education</a>
       <a href="#contact">Contact</a>
     </div>
   </nav>
@@ -286,6 +305,7 @@
           <div class="cta-row">
             <a class="btn primary" href="#project">See featured project</a>
             <a class="btn ghost" href="#contact">Get in touch</a>
+            <a class="btn ghost" href="FRIDAH_NJOKA_CV.pdf" download>Download CV</a>
           </div>
         </div>
         <div class="photo-frame">
@@ -294,18 +314,22 @@
         </div>
       </div>
  
-      <div class="quickfacts">
+      <div class="quickfacts quickfacts-4">
+        <div class="qf">
+          <div class="num">30+</div>
+          <div class="label">students per coding &amp; robotics cohort</div>
+        </div>
         <div class="qf">
           <div class="num">85%</div>
-          <div class="label">project completion rate across coding &amp; robotics cohorts</div>
+          <div class="label">project completion rate across cohorts</div>
         </div>
         <div class="qf">
           <div class="num">~20%</div>
-          <div class="label">faster issue resolution as IT Intern, Kyrioslearn Africa</div>
+          <div class="label">faster issue resolution as IT Intern</div>
         </div>
         <div class="qf">
-          <div class="num">CCNA 1</div>
-          <div class="label">networking fundamentals, Cisco Networking Academy</div>
+          <div class="num">8+</div>
+          <div class="label">team members led at Kujia Retreats</div>
         </div>
       </div>
     </div>
@@ -322,32 +346,38 @@
       <div class="about-grid reveal">
         <div>
           <p>I studied Business Information Technology at Jomo Kenyatta University of Agriculture &amp; Technology, which shaped how I think about software: not just as code, but as something built to serve a real business need and a real user.</p>
-          <p>Alongside development work, I've coordinated coding &amp; robotics programmes for 30+ learners per cohort, provided live IT support, and led teams of 8+ people through scheduling and delegation. I bring the same structured, detail-first approach to a codebase as I do to a classroom or a team.</p>
-          <p>I'm currently looking for a role — or internship — where I can keep building real applications, sharpen my engineering fundamentals, and contribute to a team that values reliability as much as creativity.</p>
+          <p>Alongside development work, I've coordinated coding &amp; robotics programmes for 30+ learners per cohort, provided live IT support, and led teams of 8+ people through scheduling and delegation. I'm a quick learner who stays calm under pressure — I bring the same structured, detail-first approach to a codebase as I do to a classroom or a team.</p>
+          <p>I'm currently looking for a role — or internship — where I can keep building real applications, sharpen my engineering fundamentals, and contribute to a team that values reliability as much as creativity. I bring a genuine passion for learning, people, and creating meaningful impact in whatever room I'm in.</p>
         </div>
         <div class="skill-groups">
           <div class="skill-group">
-            <div class="k">Front-end</div>
+            <div class="k">Web development</div>
             <div class="chip-row">
-              <span class="chip">React</span><span class="chip">JavaScript</span><span class="chip">HTML</span><span class="chip">CSS</span><span class="chip">Figma</span>
+              <span class="chip">React</span><span class="chip">JavaScript</span><span class="chip">HTML</span><span class="chip">CSS</span>
             </div>
           </div>
           <div class="skill-group">
             <div class="k">Backend &amp; data</div>
             <div class="chip-row">
-              <span class="chip">Supabase</span><span class="chip">SQL</span><span class="chip">API integration</span>
+              <span class="chip">Node.js</span><span class="chip">Supabase</span><span class="chip">SQL</span><span class="chip">API integration</span>
             </div>
           </div>
           <div class="skill-group">
-            <div class="k">Infrastructure</div>
+            <div class="k">Networking</div>
             <div class="chip-row">
               <span class="chip">CCNA</span><span class="chip">LAN/WAN</span><span class="chip">Troubleshooting</span>
             </div>
           </div>
           <div class="skill-group">
-            <div class="k">Tools</div>
+            <div class="k">Design</div>
             <div class="chip-row">
-              <span class="chip">Git</span><span class="chip">GitHub</span><span class="chip">Canva</span><span class="chip">MS Office</span>
+              <span class="chip">Figma</span><span class="chip">Canva</span><span class="chip">UI/UX</span>
+            </div>
+          </div>
+          <div class="skill-group">
+            <div class="k">Tooling</div>
+            <div class="chip-row">
+              <span class="chip">Git &amp; GitHub</span><span class="chip">Windows</span><span class="chip">Linux basics</span><span class="chip">MS Office</span>
             </div>
           </div>
         </div>
@@ -377,7 +407,10 @@
             <li>Integrated Safaricom's Daraja API to handle M‑Pesa payments directly in-app</li>
             <li>Deployed and hosted on Netlify</li>
           </ul>
-          <a class="btn ghost" href="https://shemove.netlify.app/" target="_blank" rel="noopener" style="font-size:13px; padding:10px 16px;">View project link →</a>
+          <div class="project-links">
+            <a class="btn ghost" href="https://shemove.netlify.app/" target="_blank" rel="noopener" style="font-size:13px; padding:10px 16px;">View project link →</a>
+            <a class="btn ghost" href="https://github.com/Blessings-ux" target="_blank" rel="noopener" style="font-size:13px; padding:10px 16px;">View code on GitHub →</a>
+          </div>
           <p style="color:var(--muted); font-size:13px; margin-top:14px;">💡 Try it out: sign up with any email to explore the app live.</p>
         </div>
       </div>
@@ -389,14 +422,17 @@
         <div class="project-body">
           <h3>Paper Duet</h3>
           <p class="project-tagline">Personal project · Solo build</p>
-          <p>Paper Duet is a document utility site that merges multiple file types — images, Word documents, and more — into a single combined PDF, built to simplify a task people otherwise juggle across several tools.</p>
+          <p>Paper Duet is a full-stack document utility that merges multiple file types — images, Word documents, and more — into a single combined PDF, built with a decoupled front end and back end and user authentication.</p>
           <ul>
-            <li>Built the full interface and merge logic in HTML</li>
-            <li>Supports mixed input types (images, Word docs, and other formats) in one merge flow</li>
-            <li>Outputs a single, clean PDF ready to download</li>
-            <li>Deployed and hosted on Netlify</li>
+            <li>Built the front end in HTML/CSS/JS and a separate Node.js backend service to handle merge logic</li>
+            <li>Implemented user authentication with Supabase, including custom SMTP configuration for reliable email delivery</li>
+            <li>Supports mixed input types (images, Word docs, and other formats) in one merge flow, outputting a single clean PDF</li>
+            <li>Deployed frontend on Netlify, backend on Render</li>
           </ul>
-          <a class="btn ghost" href="https://paper-duet-app.netlify.app/" target="_blank" rel="noopener" style="font-size:13px; padding:10px 16px;">View project link →</a>
+          <div class="project-links">
+            <a class="btn ghost" href="https://paper-duet-app.netlify.app/" target="_blank" rel="noopener" style="font-size:13px; padding:10px 16px;">View project link →</a>
+            <a class="btn ghost" href="https://github.com/Blessings-ux" target="_blank" rel="noopener" style="font-size:13px; padding:10px 16px;">View code on GitHub →</a>
+          </div>
         </div>
       </div>
     </div>
@@ -416,7 +452,11 @@
           <div>
             <div class="tl-role">Art Coordinator (Kids &amp; Teens)</div>
             <div class="tl-org">Brilliant Brushes · Nairobi</div>
-            <p>Ran interactive art stations at high-traffic family venues, adapting sessions for varying group sizes and ages.</p>
+            <ul>
+              <li>Set up and ran interactive painting stations at high-traffic family venues (Peekaboo, Art Caffe)</li>
+              <li>Managed art materials, supplies, and balloon giveaways for smooth, welcoming walk-in setups</li>
+              <li>Delivered on-call art classes and represented Brilliant Brushes at external events, adapting activities for varying group sizes and ages</li>
+            </ul>
           </div>
         </div>
         <div class="tl-item">
@@ -424,7 +464,12 @@
           <div>
             <div class="tl-role">Coding &amp; Robotics Coordinator</div>
             <div class="tl-org">Kyrioslearn Africa · Nairobi</div>
-            <p>Designed and delivered structured curriculum to 30+ students per cohort — 85% project completion rate, ~30% lift in assessment scores.</p>
+            <ul>
+              <li>Designed and delivered a structured coding &amp; robotics curriculum for 30+ students per cohort</li>
+              <li>Achieved an 85% project completion rate through hands-on learning</li>
+              <li>Lifted assessment scores by ~30% by simplifying programming logic and systems</li>
+              <li>Mentored learners building web apps and robotics prototypes with industry tools</li>
+            </ul>
           </div>
         </div>
         <div class="tl-item">
@@ -432,7 +477,12 @@
           <div>
             <div class="tl-role">IT Intern</div>
             <div class="tl-org">Kyrioslearn Africa · Nairobi</div>
-            <p>Troubleshot hardware, software, and network issues; cut resolution time ~20% while applying CCNA concepts in a live environment.</p>
+            <ul>
+              <li>Troubleshot hardware, software, and network issues, cutting resolution time by ~20%</li>
+              <li>Configured and maintained equipment supporting 5+ digital learning platforms</li>
+              <li>Provided live technical support to 50+ participants during training sessions</li>
+              <li>Applied CCNA networking concepts daily in a real-world IT environment</li>
+            </ul>
           </div>
         </div>
         <div class="tl-item">
@@ -440,9 +490,51 @@
           <div>
             <div class="tl-role">Team Lead (Volunteer)</div>
             <div class="tl-org">Kujia Retreats — Kujia Kenya · Nairobi</div>
-            <p>Leading a team of 8+ across retreat events, managing scheduling, delegation, and cross-team communication.</p>
+            <ul>
+              <li>Led a team of 8+ across multiple retreat events, managing scheduling and delegation</li>
+              <li>Kept operations seamless through clear inter-team communication</li>
+              <li>Contributed to positive participant experiences and repeat attendance</li>
+            </ul>
           </div>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="education">
+    <div class="trace" aria-hidden="true"></div>
+    <div class="node" style="top:0"></div>
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="eyebrow">Education</div>
+        <h2>Studies and certification.</h2>
+      </div>
+      <div class="timeline reveal">
+        <div class="tl-item">
+          <div class="tl-date">Expected Dec 2026</div>
+          <div>
+            <div class="tl-role">Bachelor of Business Information Technology</div>
+            <div class="tl-org">Jomo Kenyatta University of Agriculture &amp; Technology · Juja, Kiambu</div>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-date">Completed 2024</div>
+          <div>
+            <div class="tl-role">CCNA 1: Introduction to Networks</div>
+            <div class="tl-org">Cisco Networking Academy (Virtual)</div>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-date">—</div>
+          <div>
+            <div class="tl-role">Kenya Certificate of Secondary Education</div>
+            <div class="tl-org">Chogoria Girls' High School · Tharaka-Nithi County</div>
+          </div>
+        </div>
+      </div>
+      <div class="edu-meta reveal">
+        <div><span class="k">Languages</span> English (fluent), Kiswahili (fluent)</div>
+        <div><span class="k">Interests</span> Emerging technologies, EdTech &amp; digital learning, open-source projects, robotics &amp; IoT</div>
       </div>
     </div>
   </section>
