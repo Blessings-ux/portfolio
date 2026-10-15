@@ -1,159 +1,843 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Fridah Njoka — Web Developer</title>
-<meta name="description" content="Fridah Njoka is a Business IT graduate in Nairobi who builds full-stack software with React, Node.js and Supabase, backed by CCNA networking fundamentals.">
-<meta name="theme-color" content="#081B2B">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Montserrat:wght@600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Fridah Njoka | Web Developer</title>
+  <meta name="description" content="Fridah Njoka is a Nairobi-based web developer who builds full-stack web apps with React, Node.js, SQL and Supabase, including M-Pesa integration.">
+  <meta name="theme-color" content="#0a1322">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Fridah Njoka | Web Developer">
+  <meta property="og:description" content="Full-stack web apps with React, Node.js, SQL and Supabase, including M-Pesa integration. Based in Nairobi, Kenya.">
+  <meta property="og:url" content="https://blessings-ux.github.io/portfolio/">
+  <meta property="og:image" content="https://blessings-ux.github.io/portfolio/fridah.jpg">
+  <meta name="twitter:card" content="summary">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Fridah Blessings Wanjiku Njoka",
+    "jobTitle": "Web Developer",
+    "email": "mailto:njokafridah303@gmail.com",
+    "url": "https://blessings-ux.github.io/portfolio/",
+    "address": { "@type": "PostalAddress", "addressLocality": "Nairobi", "addressCountry": "KE" },
+    "alumniOf": "Jomo Kenyatta University of Agriculture and Technology",
+    "sameAs": [
+      "https://github.com/Blessings-ux",
+      "https://www.linkedin.com/in/fridah-njoka-09b21a32b"
+    ]
+  }
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Montserrat:wght@600;700;800&display=swap" rel="stylesheet">
+  <style>
+/* ==========================================================================
+   Fridah Njoka portfolio
+   Layout idea: fixed left column + scrolling right column (brittanychiang.com)
+   Look: deep navy, electric blue, soft bordered cards, Montserrat + Inter
+   ========================================================================== */
+
+:root {
+  --bg: #0a1322;          /* deep blue, page background */
+  --card: #101d33;        /* card and section surface */
+  --card-hover: #14253f;
+  --line: #1c2f4d;        /* borders */
+  --blue: #3882f6;        /* electric blue, primary */
+  --blue-soft: #7fb0ff;   /* lighter blue for tag text and hovers */
+  --text: #ffffff;
+  --muted: #94a3b8;       /* slate grey, secondary text */
+  --heading: "Montserrat", "Helvetica Neue", Arial, sans-serif;
+  --body: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --radius: 14px;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+* { margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--muted);
+  font-family: var(--body);
+  font-size: 1rem;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+img { max-width: 100%; display: block; }
+ul, ol { list-style: none; }
+a { color: inherit; text-decoration: none; }
+
+::selection { background: rgba(56, 130, 246, 0.4); color: var(--text); }
+
+:focus-visible {
+  outline: 2px solid var(--blue-soft);
+  outline-offset: 4px;
+  border-radius: 4px;
+}
+
+.skip {
+  position: absolute;
+  left: 16px;
+  top: -60px;
+  background: var(--blue);
+  color: #fff;
+  padding: 10px 16px;
+  border-radius: 8px;
+  z-index: 100;
+  font-weight: 600;
+}
+.skip:focus { top: 16px; }
+
+/* Soft glow that follows the cursor (set by script.js) */
+.spotlight {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background: radial-gradient(
+    600px circle at var(--x, 50%) var(--y, 30%),
+    rgba(56, 130, 246, 0.14),
+    transparent 70%
+  );
+}
+
+/* ---------- Page layout ---------- */
+.page {
+  position: relative;
+  z-index: 1;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.side { padding: 56px 0 24px; }
+.main { padding: 24px 0 64px; }
+
+@media (min-width: 1024px) {
+  .page {
+    display: flex;
+    justify-content: space-between;
+    gap: 64px;
+    padding: 0 48px;
+  }
+  .side {
+    position: sticky;
+    top: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 42%;
+    max-width: 440px;
+    height: 100vh;
+    padding: 80px 0 64px;
+  }
+  .main { width: 52%; padding: 80px 0 96px; }
+}
+
+/* ---------- Left column ---------- */
+.avatar {
+  width: 112px;
+  height: 112px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 3px solid var(--blue);
+  box-shadow: 0 0 0 6px rgba(56, 130, 246, 0.15), 0 0 40px rgba(56, 130, 246, 0.35);
+  margin-bottom: 28px;
+}
+
+.side h1 {
+  font-family: var(--heading);
+  font-weight: 800;
+  font-size: clamp(2.4rem, 5vw, 3.1rem);
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  color: var(--text);
+}
+.side h1 span { color: var(--blue); }
+
+.side h2 {
+  font-family: var(--heading);
+  font-weight: 600;
+  font-size: 1.2rem;
+  color: var(--text);
+  margin-top: 12px;
+}
+
+.tagline { margin-top: 16px; max-width: 20rem; }
+
+/* Nav with a line that grows on hover and for the current section */
+.nav { display: none; margin-top: 56px; }
+@media (min-width: 1024px) { .nav { display: block; } }
+
+.nav li + li { margin-top: 6px; }
+.nav a {
+  display: inline-flex;
+  align-items: center;
+  gap: 16px;
+  padding: 8px 0;
+  font-family: var(--heading);
+  font-weight: 600;
+  font-size: 0.8rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.nav-line {
+  display: block;
+  width: 32px;
+  height: 1px;
+  background: var(--muted);
+  transition: width 0.2s ease, background 0.2s ease;
+}
+.nav a:hover,
+.nav a.active { color: var(--text); }
+.nav a:hover .nav-line,
+.nav a.active .nav-line { width: 64px; background: var(--blue); }
+
+.side-buttons { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 32px; }
+
+.btn {
+  display: inline-block;
+  font-family: var(--heading);
+  font-weight: 600;
+  font-size: 0.9rem;
+  padding: 12px 22px;
+  border-radius: 999px;
+  border: 1.5px solid var(--blue);
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
+}
+.btn.primary { background: var(--blue); color: #fff; }
+.btn.primary:hover { background: #2f6fd8; border-color: #2f6fd8; }
+.btn.ghost { background: transparent; color: var(--text); }
+.btn.ghost:hover { background: rgba(56, 130, 246, 0.15); }
+
+.social { display: flex; gap: 20px; margin-top: 32px; }
+.social a { display: block; color: var(--muted); transition: color 0.2s ease, transform 0.2s ease; }
+.social a:hover { color: var(--blue-soft); transform: translateY(-2px); }
+.social svg { width: 24px; height: 24px; display: block; }
+
+/* ---------- Right column ---------- */
+.block { margin-bottom: 96px; scroll-margin-top: 80px; }
+@media (min-width: 1024px) { .block { margin-bottom: 120px; scroll-margin-top: 40px; } }
+
+/* On small screens the section titles stick to the top, like Brittany's mobile layout */
+.block-title {
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  margin: 0 -24px 24px;
+  padding: 16px 24px;
+  background: rgba(10, 19, 34, 0.85);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  font-family: var(--heading);
+  font-weight: 700;
+  font-size: 0.85rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text);
+}
+@media (min-width: 1024px) {
+  .block-title {
+    position: static;
+    margin: 0 0 28px;
+    padding: 0;
+    background: none;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    color: var(--blue-soft);
+  }
+}
+
+.prose p + p { margin-top: 16px; }
+.prose strong { color: var(--text); font-weight: 600; }
+
+/* Cards */
+.card {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 20px;
+  transition: border-color 0.2s ease, background 0.2s ease;
+}
+.card:hover { border-color: rgba(56, 130, 246, 0.5); background: var(--card-hover); }
+
+.facts {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  margin-top: 36px;
+}
+.facts strong {
+  display: block;
+  font-family: var(--heading);
+  font-weight: 800;
+  font-size: 2rem;
+  line-height: 1;
+  color: var(--blue);
+  margin-bottom: 8px;
+}
+.facts span { font-size: 0.9rem; }
+
+.skill-grid { display: grid; grid-template-columns: 1fr; gap: 12px; }
+@media (min-width: 640px) { .skill-grid { grid-template-columns: repeat(2, 1fr); } }
+.skill-grid h3 {
+  font-family: var(--heading);
+  font-weight: 700;
+  font-size: 1rem;
+  color: var(--text);
+  margin-bottom: 14px;
+}
+
+/* Tag pills */
+.tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+.card .tags { margin-top: 0; }
+.tags li {
+  font-size: 0.78rem;
+  font-weight: 500;
+  line-height: 1;
+  padding: 7px 12px;
+  border-radius: 999px;
+  color: var(--blue-soft);
+  background: rgba(56, 130, 246, 0.12);
+  border: 1px solid rgba(56, 130, 246, 0.25);
+}
+
+/* Projects, experience and education rows */
+.list > li + li { margin-top: 40px; }
+
+.project,
+.job { display: grid; gap: 16px; border-radius: var(--radius); }
+@media (min-width: 640px) {
+  .project { grid-template-columns: 180px 1fr; gap: 24px; }
+  .job { grid-template-columns: 150px 1fr; gap: 24px; }
+}
+
+.project h3,
+.job h3 {
+  font-family: var(--heading);
+  font-weight: 700;
+  font-size: 1.05rem;
+  line-height: 1.35;
+  color: var(--text);
+}
+.project h3 a:hover { color: var(--blue-soft); }
+.project h3 .arrow {
+  display: inline-block;
+  transition: transform 0.2s ease;
+}
+.project h3 a:hover .arrow { transform: translate(3px, -3px); }
+.project p,
+.job p { font-size: 0.95rem; }
+.project h3 + p,
+.job h3 + p { margin-top: 8px; }
+
+.project img,
+.placeholder {
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  object-position: top;
+  border-radius: 10px;
+  border: 1px solid var(--line);
+  background: var(--card);
+}
+.placeholder {
+  display: grid;
+  place-items: center;
+  font-family: var(--heading);
+  font-weight: 800;
+  font-size: 1.6rem;
+  color: var(--blue);
+  background: linear-gradient(135deg, var(--card), #12294a);
+}
+
+.status {
+  display: inline-block;
+  vertical-align: middle;
+  margin-left: 6px;
+  font-family: var(--body);
+  font-weight: 500;
+  font-size: 0.72rem;
+  line-height: 1;
+  padding: 5px 10px;
+  border-radius: 999px;
+  color: var(--bg);
+  background: var(--blue-soft);
+}
+
+.links { margin-top: 14px; }
+.links a,
+.more a {
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--text);
+  border-bottom: 1.5px solid var(--blue);
+  padding-bottom: 2px;
+  transition: color 0.2s ease;
+}
+.links a:hover,
+.more a:hover { color: var(--blue-soft); }
+.more { margin-top: 36px; }
+
+.when {
+  font-family: var(--heading);
+  font-weight: 600;
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding-top: 4px;
+}
+.org {
+  display: block;
+  margin-top: 2px;
+  font-family: var(--body);
+  font-weight: 500;
+  font-size: 0.9rem;
+  color: var(--blue-soft);
+}
+
+/* Contact */
+.lead { max-width: 34rem; }
+.contact-grid { display: grid; gap: 12px; margin-top: 28px; }
+@media (min-width: 640px) { .contact-grid { grid-template-columns: 1fr 1.3fr; } }
+
+.contact-info li + li { margin-top: 20px; }
+.contact-info span {
+  display: block;
+  font-family: var(--heading);
+  font-weight: 600;
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--blue-soft);
+  margin-bottom: 2px;
+}
+.contact-info a { color: var(--text); overflow-wrap: anywhere; }
+.contact-info a:hover { color: var(--blue-soft); }
+
+.contact-form label {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--text);
+  margin: 14px 0 6px;
+}
+.contact-form label:first-child { margin-top: 0; }
+.contact-form input,
+.contact-form textarea {
+  width: 100%;
+  font: inherit;
+  color: var(--text);
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 11px 14px;
+}
+.contact-form textarea { resize: vertical; min-height: 110px; }
+.contact-form input:focus,
+.contact-form textarea:focus { outline: none; border-color: var(--blue); box-shadow: 0 0 0 3px rgba(56, 130, 246, 0.25); }
+.contact-form [aria-invalid="true"] { border-color: #f87171; }
+.contact-form .btn { margin-top: 18px; }
+.form-note { margin-top: 14px; font-size: 0.88rem; min-height: 1.4em; }
+.form-note.error { color: #fca5a5; }
+.form-note.ok { color: var(--blue-soft); }
+
+.foot { margin-top: 64px; font-size: 0.85rem; }
+
+/* ---------- Motion preferences ---------- */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  * { transition: none !important; }
+  .spotlight { display: none; }
+}
+
+  </style>
 </head>
 <body>
-<a class="skip" href="#content">Skip to content</a>
-<div class="wrap">
-<header>
-  <div>
-    <img class="photo" src="fridah.jpg" alt="Portrait of Fridah Njoka" width="128" height="128">
-    <h1>Hi, I'm <em>Fridah</em></h1>
-    <p class="role">Web Developer</p>
-    <p class="tag">I build functional software, from React interfaces to Node.js back ends, backed by CCNA networking fundamentals.</p>
-    <p class="loc">Nairobi, Kenya. Available immediately.</p>
-    <nav aria-label="Sections">
-      <a href="#about">About</a>
-      <a href="#projects">Projects</a>
-      <a href="#skills">Skills</a>
-      <a href="#experience">Experience</a>
-      <a href="#education">Education</a>
-      <a href="#contact">Contact</a>
-    </nav>
-  </div>
-  <div class="side-bottom">
-    <a class="btn" href="FRIDAH_NJOKA_CV.pdf">Download CV</a>
-    <ul class="social">
-      <li><a href="https://github.com/Blessings-ux" aria-label="GitHub"><svg viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg></a></li>
-      <li><a href="https://www.linkedin.com/in/fridah-njoka-09b21a32b" aria-label="LinkedIn"><svg viewBox="0 0 16 16"><path d="M0 1.146C0 .513.526 0 1.175 0h13.65C15.474 0 16 .513 16 1.146v13.708c0 .633-.526 1.146-1.175 1.146H1.175C.526 16 0 15.487 0 14.854V1.146zm4.943 12.248V6.169H2.542v7.225h2.401zm-1.2-8.212c.837 0 1.358-.554 1.358-1.248-.015-.709-.52-1.248-1.342-1.248-.822 0-1.359.54-1.359 1.248 0 .694.521 1.248 1.327 1.248h.016zm4.908 8.212V9.359c0-.216.016-.432.08-.586.173-.431.568-.878 1.232-.878.869 0 1.216.662 1.216 1.634v3.865h2.401V9.25c0-2.22-1.184-3.252-2.764-3.252-1.274 0-1.845.7-2.165 1.193v.025h-.016V6.169h-2.4c.03.678 0 7.225 0 7.225h2.4z"/></svg></a></li>
-      <li><a href="mailto:njokafridah303@gmail.com" aria-label="Email"><svg class="mail" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg></a></li>
-    </ul>
-  </div>
-</header>
+  <a class="skip" href="#content">Skip to content</a>
+  <div class="spotlight" aria-hidden="true"></div>
 
-<main id="content">
-<section id="about" aria-label="About">
-  <h2 class="sec-title">About me</h2>
-  <p>I studied Business Information Technology at Jomo Kenyatta University of Agriculture &amp; Technology, which shaped how I think about software: not just as code, but as something built to serve a real business need and a real user.</p>
-  <p>I build software across the stack: <span class="hl">React and JavaScript</span> front ends, <span class="hl">Node.js</span> back ends, <span class="hl">Supabase and PostgreSQL</span> data layers, and API integrations such as M-Pesa payments through Safaricom's Daraja API. I also troubleshoot real networks with my <span class="hl">CCNA</span> foundation.</p>
-  <p>Outside of code, I've coordinated coding and robotics programmes, provided live IT support, and led teams through scheduling and delegation.</p>
-  <ul class="facts">
-    <li><b>30+</b><span>learners per cohort</span></li>
-    <li><b>85%</b><span>project completion rate</span></li>
-    <li><b>8+</b><span>team members led</span></li>
-  </ul>
-</section>
+  <div class="page" id="top">
 
-<section id="projects" aria-label="Projects">
-  <h2 class="sec-title">Featured projects</h2>
-  <div class="grid dim">
-    <article class="card proj">
-      <img src="shemove-preview.png" alt="SheMove app homepage" loading="lazy">
-      <div class="body">
-        <h3>SheMove</h3><p class="kind">Final-year project, solo build</p>
-        <p class="d">A ride-hailing platform designed around rider safety, built end to end: account handling, ride requests and in-app M-Pesa payments.</p>
-        <ul class="chips"><li>React</li><li>Supabase</li><li>PostgreSQL</li><li>Daraja API</li></ul>
-        <div class="links"><a href="https://shemove.netlify.app/">View project →</a><a href="https://github.com/Blessings-ux">Code</a></div>
+    <!-- Left column: fixed on desktop -->
+    <header class="side">
+      <div class="side-top">
+        <img class="avatar" src="fridah.jpg" alt="Portrait of Fridah Njoka" width="112" height="112">
+        <h1><a href="#top">Fridah <span>Njoka</span></a></h1>
+        <h2>Web Developer</h2>
+        <p class="tagline">I build full-stack web apps that work in the real world, from the React screen to the M-Pesa payment behind it.</p>
+
+        <nav class="nav" aria-label="Sections">
+          <ul>
+            <li><a href="#about"><span class="nav-line"></span><span class="nav-text">About</span></a></li>
+            <li><a href="#skills"><span class="nav-line"></span><span class="nav-text">Skills</span></a></li>
+            <li><a href="#projects"><span class="nav-line"></span><span class="nav-text">Projects</span></a></li>
+            <li><a href="#experience"><span class="nav-line"></span><span class="nav-text">Experience</span></a></li>
+            <li><a href="#education"><span class="nav-line"></span><span class="nav-text">Education</span></a></li>
+            <li><a href="#contact"><span class="nav-line"></span><span class="nav-text">Contact</span></a></li>
+          </ul>
+        </nav>
+
+        <div class="side-buttons">
+          <a class="btn primary" href="#projects">View my work</a>
+          <a class="btn ghost" href="FRIDAH_NJOKA_CV.pdf">Download CV</a>
+        </div>
       </div>
-    </article>
-    <article class="card proj">
-      <img src="paper-duet-preview.png" alt="Paper Duet homepage with a file drop zone" loading="lazy">
-      <div class="body">
-        <h3>Paper Duet</h3><p class="kind">Personal project, solo build</p>
-        <p class="d">A free tool that merges PDFs, Word files, slides and images into one PDF, with a "make it smaller" option for upload limits. Uploads are deleted as soon as the PDF is ready.</p>
-        <ul class="chips"><li>Node.js</li><li>LibreOffice</li><li>Ghostscript</li><li>Supabase</li></ul>
-        <div class="links"><a href="https://paper-duet-app.netlify.app/">View project →</a><a href="https://github.com/Blessings-ux">Code</a></div>
-      </div>
-    </article>
-    <article class="card proj">
-      <img src="louise-preview.png" alt="Louise Ngonge's portfolio homepage" loading="lazy">
-      <div class="body">
-        <h3>Louise's Portfolio</h3><p class="kind">Client project, solo build</p>
-        <p class="d">A portfolio site designed, built and deployed for a friend, taking her content from brief to a finished, responsive site.</p>
-        <ul class="chips"><li>HTML</li><li>CSS</li><li>Vercel</li></ul>
-        <div class="links"><a href="https://sabrina-portfolio-git-main-fblessingsfx1116-gmailcoms-projects.vercel.app/">View project →</a><a href="https://github.com/Blessings-ux/louise-portfolio">Code</a></div>
-      </div>
-    </article>
+
+      <ul class="social" aria-label="Social links">
+        <li>
+          <a href="https://github.com/Blessings-ux" aria-label="GitHub (opens in a new tab)" target="_blank" rel="noreferrer noopener">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.1.79-.25.79-.56v-2c-3.2.7-3.87-1.37-3.87-1.37-.52-1.33-1.28-1.69-1.28-1.69-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.18 1.76 1.18 1.03 1.76 2.69 1.25 3.34.96.1-.74.4-1.25.73-1.54-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.28 1.18-3.09-.12-.29-.51-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.18 1.83 1.18 3.09 0 4.42-2.69 5.39-5.25 5.68.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5Z"/></svg>
+          </a>
+        </li>
+        <li>
+          <a href="https://www.linkedin.com/in/fridah-njoka-09b21a32b" aria-label="LinkedIn (opens in a new tab)" target="_blank" rel="noreferrer noopener">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.34V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28ZM5.34 7.43a2.07 2.07 0 1 1 0-4.14 2.07 2.07 0 0 1 0 4.14ZM7.12 20.45H3.56V9h3.56v11.45ZM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0Z"/></svg>
+          </a>
+        </li>
+        <li>
+          <a href="mailto:njokafridah303@gmail.com" aria-label="Email Fridah">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" d="M3 5.5h18v13H3zM3.5 6l8.5 7 8.5-7"/></svg>
+          </a>
+        </li>
+      </ul>
+    </header>
+
+    <!-- Right column: scrolls -->
+    <main id="content" class="main">
+
+      <section id="about" class="block" aria-labelledby="about-title">
+        <h2 class="block-title" id="about-title">About</h2>
+        <div class="prose">
+          <p>I'm a Business Information Technology graduate from JKUAT who builds full-stack web apps and troubleshoots real networks. My work runs on <strong>React</strong>, <strong>Node.js</strong>, <strong>SQL</strong> and <strong>Supabase</strong>, and I've integrated the <strong>M-Pesa Daraja API</strong> into my projects.</p>
+          <p>I use Git every day, debug methodically, and work well on my own in remote settings. I've also taught coding to 30+ students per cohort and given hands-on IT support, so I'm used to explaining technical things clearly to people who are new to them.</p>
+          <p>Outside of code, I coordinate art classes for kids and teens and lead a volunteer team on retreats. Both keep me practised at working with people and keeping an event running.</p>
+        </div>
+
+        <ul class="facts">
+          <li class="card"><strong>30+</strong><span>students taught per cohort</span></li>
+          <li class="card"><strong>85%</strong><span>project completion rate</span></li>
+          <li class="card"><strong>50+</strong><span>people given live tech support</span></li>
+          <li class="card"><strong>8+</strong><span>volunteers led</span></li>
+        </ul>
+      </section>
+
+      <section id="skills" class="block" aria-labelledby="skills-title">
+        <h2 class="block-title" id="skills-title">Skills</h2>
+        <div class="skill-grid">
+          <article class="card">
+            <h3>Web development</h3>
+            <ul class="tags"><li>JavaScript</li><li>React</li><li>HTML5</li><li>CSS3</li><li>Node.js</li></ul>
+          </article>
+          <article class="card">
+            <h3>Backend and databases</h3>
+            <ul class="tags"><li>Supabase</li><li>SQL</li><li>REST APIs</li><li>M-Pesa Daraja</li></ul>
+          </article>
+          <article class="card">
+            <h3>Version control</h3>
+            <ul class="tags"><li>Git</li><li>GitHub</li></ul>
+          </article>
+          <article class="card">
+            <h3>Networking and support</h3>
+            <ul class="tags"><li>CCNA</li><li>LAN/WAN</li><li>Hardware, software and network troubleshooting</li></ul>
+          </article>
+          <article class="card">
+            <h3>Design</h3>
+            <ul class="tags"><li>Figma</li><li>Canva</li><li>UI/UX</li></ul>
+          </article>
+          <article class="card">
+            <h3>Systems and tools</h3>
+            <ul class="tags"><li>Windows</li><li>Linux basics</li><li>MS Office</li></ul>
+          </article>
+        </div>
+      </section>
+
+      <section id="projects" class="block" aria-labelledby="projects-title">
+        <h2 class="block-title" id="projects-title">Projects</h2>
+        <ul class="list">
+
+          <li class="project">
+            <img src="shemove-preview.png" alt="SheMove app homepage" width="640" height="400" loading="lazy">
+            <div>
+              <h3><a href="https://shemove.netlify.app/" target="_blank" rel="noreferrer noopener">SheMove <span class="arrow" aria-hidden="true">&#8599;</span></a></h3>
+              <p>A women-focused ride-hailing app, built solo as my final-year project. Riders can book rides and pay in the app with M-Pesa.</p>
+              <ul class="tags"><li>React</li><li>Supabase</li><li>M-Pesa Daraja</li><li>Netlify</li></ul>
+              <p class="links"><a href="https://github.com/Blessings-ux/shemove-app" target="_blank" rel="noreferrer noopener">View code</a></p>
+            </div>
+          </li>
+
+          <li class="project">
+            <img src="paper-duet-preview.png" alt="Paper Duet homepage with a file drop zone and a Merge and download button" width="640" height="400" loading="lazy">
+            <div>
+              <h3><a href="https://paper-duet-app.netlify.app/" target="_blank" rel="noreferrer noopener">Paper Duet <span class="arrow" aria-hidden="true">&#8599;</span></a> <span class="status">In development</span></h3>
+              <p>A document merging tool. Upload documents, reorder them, and merge them into a single PDF.</p>
+              <ul class="tags"><li>Node.js</li><li>Supabase auth</li><li>Ghostscript</li><li>LibreOffice</li></ul>
+              <!-- TODO: replace this link with the Paper Duet repository URL -->
+              <p class="links"><a href="https://github.com/Blessings-ux" target="_blank" rel="noreferrer noopener">View code</a></p>
+            </div>
+          </li>
+
+          <li class="project">
+            <div class="placeholder" aria-hidden="true">Tillo</div>
+            <div>
+              <h3>Tillo <span class="status">In development</span></h3>
+              <p>A checkout-link tool for social-commerce sellers. A merchant shares a link and the buyer pays with an M-Pesa prompt on their phone.</p>
+              <ul class="tags"><li>Safaricom Daraja</li><li>STK Push</li></ul>
+            </div>
+          </li>
+
+          <li class="project">
+            <img src="louise-preview.png" alt="Louise Ngonge's portfolio homepage" width="640" height="400" loading="lazy">
+            <div>
+              <h3><a href="https://sabrina-portfolio-git-main-fblessingsfx1116-gmailcoms-projects.vercel.app/" target="_blank" rel="noreferrer noopener">Louise's portfolio <span class="arrow" aria-hidden="true">&#8599;</span></a></h3>
+              <p>A portfolio site I designed, built and deployed for a friend so she can show her work to employers. Hand-coded and responsive.</p>
+              <ul class="tags"><li>HTML</li><li>CSS</li><li>Vercel</li></ul>
+              <p class="links"><a href="https://github.com/Blessings-ux/louise-portfolio" target="_blank" rel="noreferrer noopener">View code</a></p>
+            </div>
+          </li>
+
+        </ul>
+      </section>
+
+      <section id="experience" class="block" aria-labelledby="experience-title">
+        <h2 class="block-title" id="experience-title">Experience</h2>
+        <ol class="list">
+
+          <li class="job">
+            <p class="when">Jan 2026 to present</p>
+            <div>
+              <h3>Art Coordinator, Kids &amp; Teens <span class="org">Brilliant Brushes, Nairobi</span></h3>
+              <p>Run interactive painting stations at family venues and manage art materials and event setups. Deliver on-call art classes and represent the brand at external events.</p>
+              <ul class="tags"><li>Event setup</li><li>Teaching</li><li>Customer-facing</li></ul>
+            </div>
+          </li>
+
+          <li class="job">
+            <p class="when">Oct 2025 to present</p>
+            <div>
+              <h3>Team Lead, volunteer <span class="org">Kujia Retreats, Nairobi</span></h3>
+              <p>Lead a team of 8+ across multiple retreat events, managing scheduling and delegation. Keep operations running smoothly through clear communication and proactive problem-solving.</p>
+              <ul class="tags"><li>Leadership</li><li>Scheduling</li><li>Operations</li></ul>
+            </div>
+          </li>
+
+          <li class="job">
+            <p class="when">Jun 2025 to Nov 2025</p>
+            <div>
+              <h3>Coding &amp; Robotics Coordinator <span class="org">Kyrioslearn Africa, Nairobi</span></h3>
+              <p>Designed and delivered a structured coding and robotics curriculum to 30+ students per cohort, with an 85% project completion rate. Improved student assessment scores by about 30% by simplifying programming logic and system concepts, and mentored learners building web applications and robotics prototypes.</p>
+              <ul class="tags"><li>Curriculum design</li><li>Web apps</li><li>Robotics</li><li>Mentoring</li></ul>
+            </div>
+          </li>
+
+          <li class="job">
+            <p class="when">Apr 2025 to Jun 2025</p>
+            <div>
+              <h3>IT Intern <span class="org">Kyrioslearn Africa, Nairobi</span></h3>
+              <p>Troubleshot hardware, software and network issues, reducing resolution time by about 20%. Configured and maintained equipment supporting 5+ digital learning platforms, and gave live technical support to 50+ participants during training sessions.</p>
+              <ul class="tags"><li>CCNA</li><li>Troubleshooting</li><li>Helpdesk</li></ul>
+            </div>
+          </li>
+
+          <li class="job">
+            <p class="when">Industrial attachment</p>
+            <div>
+              <h3>IT Department <span class="org">EMESA ICT</span></h3>
+              <p>Network troubleshooting and helpdesk support. Wrote systems documentation.</p>
+              <ul class="tags"><li>Networking</li><li>Documentation</li></ul>
+            </div>
+          </li>
+
+        </ol>
+        <p class="more"><a href="FRIDAH_NJOKA_CV.pdf">View full CV</a></p>
+      </section>
+
+      <section id="education" class="block" aria-labelledby="education-title">
+        <h2 class="block-title" id="education-title">Education</h2>
+        <ol class="list">
+          <li class="job">
+            <p class="when">Expected December 2026</p>
+            <div>
+              <h3>Bachelor of Business Information Technology</h3>
+              <p>Jomo Kenyatta University of Agriculture and Technology (JKUAT), Juja</p>
+            </div>
+          </li>
+          <li class="job">
+            <p class="when">2024</p>
+            <div>
+              <h3>CCNA 1: Introduction to Networks</h3>
+              <p>Cisco Networking Academy</p>
+            </div>
+          </li>
+          <li class="job">
+            <p class="when">Languages</p>
+            <div>
+              <h3>English and Kiswahili</h3>
+              <p>Both fluent. Referees available on request.</p>
+            </div>
+          </li>
+        </ol>
+      </section>
+
+      <section id="contact" class="block" aria-labelledby="contact-title">
+        <h2 class="block-title" id="contact-title">Contact</h2>
+        <p class="lead">I'm open to roles in web development, IT support, UI/UX and operations. Send me a message and I'll reply as soon as I can.</p>
+
+        <div class="contact-grid">
+          <ul class="card contact-info">
+            <li><span>Email</span><a href="mailto:njokafridah303@gmail.com">njokafridah303@gmail.com</a></li>
+            <li><span>Phone</span><a href="tel:+254705361189">+254 705 361 189</a></li>
+            <li><span>Location</span>Nairobi, Kenya</li>
+          </ul>
+
+          <form class="card contact-form" id="contact-form" novalidate>
+            <label for="name">Name</label>
+            <input id="name" name="name" type="text" autocomplete="name" required>
+
+            <label for="email">Your email</label>
+            <input id="email" name="email" type="email" autocomplete="email" required>
+
+            <label for="message">Message</label>
+            <textarea id="message" name="message" rows="4" required></textarea>
+
+            <p class="form-note" id="form-note" role="status"></p>
+            <button class="btn primary" type="submit">Send message</button>
+          </form>
+        </div>
+      </section>
+
+      <footer class="foot">
+        <p>Designed and coded by me. Set in Montserrat and Inter. &copy; <span id="year">2026</span> Fridah Blessings Wanjiku Njoka.</p>
+      </footer>
+    </main>
   </div>
-</section>
 
-<section id="skills" aria-label="Skills">
-  <h2 class="sec-title">Skills and what I do</h2>
-  <div class="grid skills">
-    <div class="card"><h3>Front-end</h3><ul class="chips"><li>React</li><li>JavaScript</li><li>HTML</li><li>CSS</li></ul></div>
-    <div class="card"><h3>Back-end &amp; APIs</h3><ul class="chips"><li>Node.js</li><li>API integration</li><li>M-Pesa (Daraja)</li><li>File processing</li></ul></div>
-    <div class="card"><h3>Databases &amp; hosting</h3><ul class="chips"><li>Supabase</li><li>PostgreSQL</li><li>SQL</li><li>Render</li><li>Netlify</li><li>Vercel</li></ul></div>
-    <div class="card"><h3>Networking</h3><ul class="chips"><li>CCNA</li><li>LAN/WAN</li><li>Troubleshooting</li></ul></div>
-    <div class="card"><h3>Design &amp; tooling</h3><ul class="chips"><li>Figma</li><li>Canva</li><li>Git &amp; GitHub</li><li>Linux basics</li></ul></div>
-  </div>
-  <div class="grid what" style="margin-top:14px">
-    <div class="card"><h3>Full-stack development</h3><p>End-to-end web apps: React interfaces, Node.js back ends, Supabase databases and payment APIs.</p></div>
-    <div class="card"><h3>IT support</h3><p>Hardware, software and network troubleshooting, backed by CCNA.</p></div>
-    <div class="card"><h3>Coding education</h3><p>Beginner-friendly coding and robotics lessons for young learners.</p></div>
-  </div>
-</section>
+  <script>
+/* ==========================================================================
+   Fridah Njoka portfolio: script.js
+   1. Cursor spotlight
+   2. Highlight the current section in the left nav
+   3. Contact form (opens the visitor's email app with the message filled in)
+   4. Footer year
+   ========================================================================== */
 
-<section id="experience" aria-label="Experience">
-  <h2 class="sec-title">Experience</h2>
-  <ol class="list dim">
-    <li class="item"><div class="when">Jan 2026 – Present</div><div>
-      <h3>Art Coordinator (Kids &amp; Teens)<span>Brilliant Brushes, Nairobi</span></h3>
-      <ul class="pts"><li>Ran interactive painting stations at high-traffic family venues, including Peekaboo and Art Caffe.</li><li>Delivered on-call art classes and represented the brand at external events, adapting activities to different ages and group sizes.</li></ul></div></li>
-    <li class="item"><div class="when">Oct 2025 – Present</div><div>
-      <h3>Volunteer Team Lead<span>Kujia Retreats, Nairobi</span></h3>
-      <ul class="pts"><li>Led a team of 8+ across multiple retreat events, managing scheduling and delegation.</li><li>Kept operations smooth through clear communication between teams.</li></ul></div></li>
-    <li class="item"><div class="when">Jun – Nov 2025</div><div>
-      <h3>Coding &amp; Robotics Coordinator<span>Kyrioslearn Africa, Nairobi</span></h3>
-      <ul class="pts"><li>Designed and delivered a coding and robotics curriculum for 30+ students per cohort.</li><li>Reached an 85% project completion rate and lifted assessment scores by about 30% by simplifying programming logic.</li></ul>
-      <ul class="chips"><li>Curriculum design</li><li>Web apps</li><li>Robotics</li></ul></div></li>
-    <li class="item"><div class="when">Apr – Jun 2025</div><div>
-      <h3>IT Intern<span>Kyrioslearn Africa, Nairobi</span></h3>
-      <ul class="pts"><li>Troubleshot hardware, software and network issues, cutting resolution time by about 20%.</li><li>Gave live technical support to 50+ participants and maintained equipment for 5+ digital learning platforms.</li></ul>
-      <ul class="chips"><li>CCNA</li><li>IT support</li></ul></div></li>
-  </ol>
-</section>
+(function () {
+  "use strict";
 
-<section id="education" aria-label="Education">
-  <h2 class="sec-title">Education</h2>
-  <ol class="list dim">
-    <li class="item"><div class="when">Aug 2026</div><div><h3>Bachelor of Business Information Technology<span>Jomo Kenyatta University of Agriculture &amp; Technology, Juja</span></h3></div></li>
-    <li class="item"><div class="when">Aug 2024</div><div><h3>CCNA 1: Introduction to Networks<span>Cisco Networking Academy</span></h3></div></li>
-    <li class="item"><div class="when">Apr 2022</div><div><h3>Kenya Certificate of Secondary Education<span>Chogoria Girls' High School</span></h3></div></li>
-  </ol>
-  <p style="margin-top:18px;font-size:.9rem">Languages: English and Kiswahili, both fluent.</p>
-</section>
+  /* 1. Cursor spotlight ---------------------------------------------------- */
+  var spotlight = document.querySelector(".spotlight");
+  var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-<section id="contact" aria-label="Contact">
-  <h2 class="sec-title">Let's work together</h2>
-  <div class="cta">
-    <h3>Have a role or project in mind?</h3>
-    <p>I'm open to roles and internships in web development, IT support and operations. I'd love to hear from you.</p>
-    <div class="row"><a class="btn" href="mailto:njokafridah303@gmail.com">Get in touch</a><a class="btn ghost" href="FRIDAH_NJOKA_CV.pdf">Download CV</a></div>
-  </div>
-  <div class="card contactcard">
-    <p><a href="mailto:njokafridah303@gmail.com">njokafridah303@gmail.com</a> &nbsp;·&nbsp; <a href="tel:+254705361189">+254 705 361 189</a> &nbsp;·&nbsp; Nairobi, Kenya</p>
-    <form id="msg" aria-label="Send me a message">
-      <label>Your name<input name="name" required placeholder="Your name" autocomplete="name"></label>
-      <label>Your email<input name="email" type="email" required placeholder="you@example.com" autocomplete="email"></label>
-      <label>Message<textarea name="message" required placeholder="Tell me about the role or project"></textarea></label>
-      <button class="btn" type="submit" style="justify-self:start">Send message</button>
-    </form>
-  </div>
-</section>
+  if (spotlight && !reduceMotion) {
+    var frame = null;
+    window.addEventListener("pointermove", function (event) {
+      if (frame) return;
+      frame = requestAnimationFrame(function () {
+        spotlight.style.setProperty("--x", event.clientX + "px");
+        spotlight.style.setProperty("--y", event.clientY + "px");
+        frame = null;
+      });
+    });
+  }
 
-<footer>&copy; 2026 Fridah Blessings Wanjiku Njoka. Nairobi, Kenya.</footer>
-</main>
-</div>
+  /* 2. Scroll spy for the nav ---------------------------------------------- */
+  var navLinks = Array.prototype.slice.call(document.querySelectorAll(".nav a"));
+  var sections = navLinks
+    .map(function (link) { return document.querySelector(link.getAttribute("href")); })
+    .filter(Boolean);
 
-<script src="script.js"></script>
+  function setActive(id) {
+    navLinks.forEach(function (link) {
+      var isActive = link.getAttribute("href") === "#" + id;
+      link.classList.toggle("active", isActive);
+      if (isActive) {
+        link.setAttribute("aria-current", "true");
+      } else {
+        link.removeAttribute("aria-current");
+      }
+    });
+  }
+
+  if ("IntersectionObserver" in window && sections.length) {
+    var observer = new IntersectionObserver(
+      function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) setActive(entry.target.id);
+        });
+      },
+      { rootMargin: "-35% 0px -55% 0px", threshold: 0 }
+    );
+    sections.forEach(function (section) { observer.observe(section); });
+  }
+
+  /* 3. Contact form --------------------------------------------------------- */
+  var form = document.getElementById("contact-form");
+  var note = document.getElementById("form-note");
+  var EMAIL = "njokafridah303@gmail.com";
+
+  function showNote(text, type) {
+    note.textContent = text;
+    note.className = "form-note " + (type || "");
+  }
+
+  if (form && note) {
+    form.addEventListener("submit", function (event) {
+      event.preventDefault();
+
+      var fields = {
+        name: form.elements.name,
+        email: form.elements.email,
+        message: form.elements.message
+      };
+
+      var missing = null;
+      Object.keys(fields).forEach(function (key) {
+        var field = fields[key];
+        var empty = !field.value.trim();
+        var badEmail = key === "email" && !empty && !/^\S+@\S+\.\S+$/.test(field.value.trim());
+        var invalid = empty || badEmail;
+        field.setAttribute("aria-invalid", invalid ? "true" : "false");
+        if (invalid && !missing) missing = field;
+      });
+
+      if (missing) {
+        showNote(
+          missing === fields.email
+            ? "Enter a valid email address so I can reply."
+            : "Fill in your name, email and message.",
+          "error"
+        );
+        missing.focus();
+        return;
+      }
+
+      var subject = "Portfolio message from " + fields.name.value.trim();
+      var body =
+        fields.message.value.trim() +
+        "\n\n" + fields.name.value.trim() +
+        "\n" + fields.email.value.trim();
+
+      window.location.href =
+        "mailto:" + EMAIL +
+        "?subject=" + encodeURIComponent(subject) +
+        "&body=" + encodeURIComponent(body);
+
+      showNote("Your email app should open with the message ready to send.", "ok");
+    });
+  }
+
+  /* 4. Footer year ---------------------------------------------------------- */
+  var year = document.getElementById("year");
+  if (year) year.textContent = new Date().getFullYear();
+})();
+
+  </script>
 </body>
 </html>
